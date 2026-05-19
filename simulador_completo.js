@@ -1,6 +1,8 @@
 
 let clientes = [];
 let creditos = [];
+let montoMaximoConfigurado = 10000;
+
 
 let tasaConfigurada = 15;
 
@@ -16,7 +18,7 @@ let creditoAprobado = false;
 // SECCIONES
 
 function ocultarSecciones() {
-    let ids = ["parametros", "clientes", "credito"];
+    let ids = ["parametros", "clientes", "credito","acerca"];
     for (let i = 0; i < ids.length; i++) {
         let componente = document.getElementById(ids[i]);
         if (componente != null) {
@@ -54,6 +56,14 @@ function guardarTasa() {
             "La tasa debe estar entre 10% y 20%"
         );
     }
+
+    let montoMaximo =
+        recuperarFloat("montoMaximo");
+
+    if (!isNaN(montoMaximo)) {
+        montoMaximoConfigurado =
+            montoMaximo;
+    }
 }
 
 // GUARDAR CLIENTE
@@ -62,6 +72,7 @@ function guardarCliente() {
     let cedula = recuperaraTexto("cedula");
     let nombre = recuperaraTexto("nombre");
     let apellido = recuperaraTexto("apellidos");
+    let telefono = recuperaraTexto("telefono");
     let ingresos = recuperarFloat("ingresos");
     let egresos = recuperarFloat("egresos");
 
@@ -77,6 +88,10 @@ function guardarCliente() {
         alert("Ingresos y egresos deben ser numéricos");
         return;
     }
+    if (telefono == "") {
+        alert("Ingrese teléfono");
+        return;
+    }
 
 
     // BUSCAR CLIENTE
@@ -89,6 +104,7 @@ function guardarCliente() {
             cedula: cedula,
             nombre: nombre,
             apellido: apellido,
+            telefono: telefono,
             ingresos: ingresos,
             egresos: egresos
         };
@@ -100,6 +116,7 @@ function guardarCliente() {
         // ACTUALIZAR
         clienteExistente.nombre = nombre;
         clienteExistente.apellido = apellido;
+        clienteExistente.telefono = telefono;
         clienteExistente.ingresos = ingresos;
         clienteExistente.egresos = egresos;
     }
@@ -119,6 +136,7 @@ function pintarClientes() {
             "<td>" + clientes[i].cedula + "</td>" +
             "<td>" + clientes[i].nombre + "</td>" +
             "<td>" + clientes[i].apellido + "</td>" +
+            "<td>" + clientes[i].telefono + "</td>" +
             "<td>" + clientes[i].ingresos + "</td>" +
             "<td>" + clientes[i].egresos + "</td>" +
 
@@ -169,6 +187,7 @@ function seleccionarCliente(cedula) {
     mostrarTextoEnCaja("cedula", cliente.cedula);
     mostrarTextoEnCaja("nombre", cliente.nombre);
     mostrarTextoEnCaja("apellidos", cliente.apellido);
+    mostrarTextoEnCaja("telefono", cliente.telefono);
     mostrarTextoEnCaja("ingresos", cliente.ingresos);
     mostrarTextoEnCaja("egresos", cliente.egresos);
 }
@@ -194,6 +213,7 @@ function limpiarFormularioCliente() {
     mostrarTextoEnCaja("cedula", "");
     mostrarTextoEnCaja("nombre", "");
     mostrarTextoEnCaja("apellidos", "");
+    mostrarTextoEnCaja("telefono", "");
     mostrarTextoEnCaja("ingresos", "");
     mostrarTextoEnCaja("egresos", "");
 }
@@ -253,6 +273,12 @@ function calcularCredito() {
         return;
     }
     let monto = recuperarFloat("montoCredito");
+    if (monto > montoMaximoConfigurado) {
+
+        alert("El monto supera el máximo permitido");
+        mostrarTextoEnCaja("montoCredito", "");
+        return;
+    }
     let plazo = recuperarFloat("plazoCredito");
     if (isNaN(monto) || isNaN(plazo)) {
         alert("Ingrese monto y plazo válidos");
@@ -413,4 +439,18 @@ function buscarCreditosCliente() {
 
 function mostrarTodosCreditos() {
     pintarCreditos(creditos);
+}
+
+function mostrarCreditosVIP() {
+    let creditosVIP = [];
+    for (let i = 0; i < creditos.length; i++) {
+        if (creditos[i].monto > 5000) {
+            creditosVIP.push(creditos[i]);
+        }
+    }
+    pintarCreditos(creditosVIP);
+}
+
+function mostrarAcercaDe() {
+    mostrarSeccion("acerca");
 }

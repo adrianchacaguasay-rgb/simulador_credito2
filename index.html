@@ -8,8 +8,7 @@
         Sistema de Créditos
     </title>
 
-    <link rel="stylesheet"
-        href="simulador_completo.css">
+    <link rel="stylesheet" href="simulador_completo.css">
 </head>
 
 <body>
@@ -36,6 +35,10 @@
             Créditos
         </button>
 
+        <button onclick="mostrarAcercaDe()">
+            Acerca de
+        </button>
+
     </nav>
 
 
@@ -50,8 +53,7 @@
             Tasa de interés:
         </label>
 
-        <input type="number"
-            id="tasaInteres">
+        <input type="number" id="tasaInteres">
 
         <span>%</span>
 
@@ -62,6 +64,13 @@
         </button>
 
         <p id="mensajeTasa"></p>
+        <br><br>
+
+        <label>Monto Máximo:</label>
+
+        <input type="number" id="montoMaximo">
+
+        <br><br>
 
     </section>
 
@@ -73,25 +82,12 @@
             Registro de Clientes
         </h2>
 
-        <input type="text"
-            id="cedula"
-            placeholder="Cédula">
-
-        <input type="text"
-            id="nombre"
-            placeholder="Nombre">
-
-        <input type="text"
-            id="apellidos"
-            placeholder="Apellido">
-
-        <input type="number"
-            id="ingresos"
-            placeholder="Ingresos">
-
-        <input type="number"
-            id="egresos"
-            placeholder="Egresos">
+        <input type="text" id="cedula" placeholder="Cédula">
+        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="text" id="apellidos" placeholder="Apellido">
+        <input type="text" id="telefono" placeholder="Teléfono">
+        <input type="number" id="ingresos" placeholder="Ingresos">
+        <input type="number" id="egresos" placeholder="Egresos">
 
         <br><br>
 
@@ -114,6 +110,7 @@
                     <th>Cédula</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
+                    <th>Teléfono</th>
                     <th>Ingresos</th>
                     <th>Egresos</th>
                     <th>Acciones</th>
@@ -138,9 +135,7 @@
             Solicitar Crédito
         </h2>
 
-        <input type="text"
-            id="buscarCedulaCredito"
-            placeholder="Ingrese cédula">
+        <input type="text" id="buscarCedulaCredito" placeholder="Ingrese cédula">
 
         <button onclick="buscarClienteCredito()">
             Buscar Cliente
@@ -148,16 +143,13 @@
 
         <br><br>
 
-        <div id="datosClienteCredito"
-            class="card">
+        <div id="datosClienteCredito" class="card">
 
         </div>
 
         <br>
 
-        <input type="number"
-            id="montoCredito"
-            placeholder="Monto del crédito">
+        <input type="number" id="montoCredito" placeholder="Monto del crédito">
 
         <br>
 
@@ -167,9 +159,7 @@
 
         <br><br>
 
-        <input type="number"
-            id="plazoCredito"
-            placeholder="Plazo">
+        <input type="number" id="plazoCredito" placeholder="Plazo">
 
         <br>
 
@@ -191,9 +181,7 @@
 
         <br>
 
-        <button id="btnSolicitarCredito"
-            onclick="asignarCredito()"
-            disabled>
+        <button id="btnSolicitarCredito" onclick="asignarCredito()" disabled>
 
             Solicitar Crédito
 
@@ -208,9 +196,7 @@
             Listado de Créditos
         </h2>
 
-        <input type="text"
-            id="buscarCedulaListado"
-            placeholder="Buscar por cédula">
+        <input type="text" id="buscarCedulaListado" placeholder="Buscar por cédula">
 
         <button onclick="buscarCreditosCliente()">
             Buscar Créditos
@@ -218,6 +204,9 @@
 
         <button onclick="mostrarTodosCreditos()">
             Mostrar Todos
+        </button>
+        <button onclick="mostrarCreditosVIP()">
+            Créditos VIP
         </button>
 
         <br><br>
@@ -245,6 +234,29 @@
             </tbody>
 
         </table>
+
+    </section>
+
+    <section id="acerca">
+        <h2>Acerca del Sistema</h2>
+        <img src="logo.png" width="200">
+        <p>
+            <strong>Nombre:</strong>
+            Adrian Chacaguasay
+        </p>
+        <p>
+            <strong>Carrera:</strong>
+            Física y Desarrollo de software
+        </p>
+        <p>
+            <strong>Frase:</strong>
+            "La disciplina supera al talento."
+        </p>
+
+        <p>
+            <strong>GitHub:</strong>
+            AdrianChacaguasay
+        </p>
 
     </section>
 
